@@ -38,9 +38,7 @@ class HomeScreenState extends State<HomeScreen> {
           await rootBundle.loadString('assets/data/herbs.json');
       final data = json.decode(response);
       setState(() {
-        _herbs = (data['herbs'] as List)
-            .map((i) => Herb.fromJson(i))
-            .toList();
+        _herbs = (data['herbs'] as List).map((i) => Herb.fromJson(i)).toList();
         _filteredHerbs = _herbs;
         _isLoading = false;
       });
@@ -63,10 +61,11 @@ class HomeScreenState extends State<HomeScreen> {
     }
     return allHerbs.where((herb) {
       return herb.name.toLowerCase().contains(lower) ||
-             herb.scientificName.toLowerCase().contains(lower) ||
-             herb.facts.toLowerCase().contains(lower) ||
-             herb.preparation.toLowerCase().contains(lower) ||
-             herb.uses.any((use) => use.toLowerCase().contains(lower));
+          herb.scientificName.toLowerCase().contains(lower) ||
+          herb.description.toLowerCase().contains(lower) ||
+          herb.healthBenefits
+              .any((benefit) => benefit.toLowerCase().contains(lower)) ||
+          herb.usage.any((use) => use.toLowerCase().contains(lower));
     }).toList();
   }
 
@@ -120,7 +119,8 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         )
                       : GridView.builder(
-                          padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0),
+                          padding:
+                              const EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,

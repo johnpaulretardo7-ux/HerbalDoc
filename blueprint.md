@@ -2,11 +2,11 @@
 
 ## Overview
 
-HerbalDoc is a complete offline mobile application for Flutter that serves as a Filipino Herbal Guide. The app provides users with a quick and easy way to access information about various local medicinal herbs. With the new symptom-based search, users can find remedies even if they don't know the name of the herb. All data is stored locally, making the app 100% functional without an internet connection.
+HerbalDoc is a complete offline mobile application for Flutter that serves as a Filipino Herbal Guide. The app provides users with a quick and easy way to access information about various local medicinal herbs. With the new symptom-based search, users can find remedies even if they don't know the name of the herb. All data is stored locally, making the app 100% functional without an internet connection. The app also allows users to create a personal list of their favorite herbs.
 
 ## Current Status
 
-The application is fully functional. The search functionality has been upgraded to support symptom-based queries.
+The application is fully functional. The search functionality has been upgraded to support symptom-based queries, and users can now manage a list of their favorite herbs.
 
 ## Features & Design
 
@@ -21,12 +21,14 @@ The application is fully functional. The search functionality has been upgraded 
     - Interesting Facts
     - Preparation Instructions
     - Uses (displayed as interactive chips)
+- **My List:** Users can add or remove herbs from a personal "My List" of favorites.
 
 ### Navigation Flow:
 
 1.  **Splash Screen** (Initial launch)
 2.  **Home Page** (Displays the herb grid with a symptom-based search bar)
 3.  **Herb Details Page** (Shows complete information for a selected herb)
+4.  **My List** (Accessible via the bottom navigation bar, displays a list of favorite herbs)
 
 ### Design Principles:
 
@@ -43,12 +45,16 @@ The application is fully functional. The search functionality has been upgraded 
 /lib
   /models
     - herb.dart
+  /providers
+    - favorite_provider.dart
   /screens
     - splash_screen.dart
     - home_screen.dart
     - herb_detail_screen.dart
+    - favorites_screen.dart
   /widgets
     - herb_card.dart
+    - bottom_nav_handler.dart
   - main.dart
 
 /assets
@@ -73,3 +79,15 @@ The application is fully functional. The search functionality has been upgraded 
     - Modified the `Herb` data model to match the new JSON structure.
     - Implemented the advanced search logic in `home_screen.dart` to search across multiple fields, including the `uses` array.
     - Updated the `herb_detail_screen.dart` to display the uses as chips.
+8.  **Implemented "My List" Feature:**
+    - Added the `provider` package for state management.
+    - Created a `FavoriteProvider` to manage the list of favorite herbs.
+    - Integrated the `FavoriteProvider` into the app.
+    - Added a "favorite" button to the `HerbDetailScreen` to add/remove herbs.
+    - Created a `FavoritesScreen` to display the list of favorite herbs.
+    - Updated the `BottomNavHandler` to include the `FavoritesScreen`.
+9.  **Fixed "My List" Bug:**
+    - Resolved an issue where favorited herbs were not appearing in the "My List" screen.
+    - Overrode the `==` operator and `hashCode` in the `Herb` model to ensure correct object comparison.
+10. **Code Cleanup:**
+    - Removed an unused import from `lib/models/herb.dart`.
