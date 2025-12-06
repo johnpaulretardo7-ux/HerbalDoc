@@ -1,3 +1,4 @@
+
 {
     "herbs": [
         {
@@ -349,6 +350,16 @@
             "preparation": "Kainin bilang salad o pakuluan.",
             "uses": ["gout", "rayuma", "arthritis"],
             "imageUrl": "assets/images/ulasmang_bato.png"
+        },
+        {
+            "id": "herb_036",
+            "name": "Atis (Dahon)",
+            "scientific_name": "Annona squamosa",
+            "part_used": "Dahon",
+            "facts": "Ginagamit para sa sakit ng tiyan, ubo, at pagsusuka.",
+            "preparation": "Pakuluan ang dahon at gawing tsaa.",
+            "uses": ["sakit ng tiyan", "ubo", "pagsusuka"],
+            "imageUrl": "assets/images/atis_dahon.png"
         }
     ]
 }
