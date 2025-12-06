@@ -20,12 +20,10 @@ class HerbDetailScreen extends StatelessWidget {
           IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? Colors.red : null,
+              color: isFavorite ? Colors.red : Colors.white,
             ),
             onPressed: () {
-              final provider =
-                  Provider.of<FavoriteProvider>(context, listen: false);
-              provider.toggleFavorite(herb);
+              favoriteProvider.toggleFavorite(herb);
             },
           ),
         ],
@@ -40,6 +38,13 @@ class HerbDetailScreen extends StatelessWidget {
                 herb.imageUrl,
                 fit: BoxFit.cover,
                 height: 300,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 300,
+                    color: Colors.grey[200],
+                    child: const Icon(Icons.grass, size: 100, color: Colors.grey),
+                  );
+                },
               ),
             ),
             Padding(
@@ -61,26 +66,31 @@ class HerbDetailScreen extends StatelessWidget {
                           color: Colors.grey[700],
                         ),
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    herb.description,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.justify,
-                  ),
                   const SizedBox(height: 24),
-                  if (herb.healthBenefits.isNotEmpty)
+                  _buildSection(
+                    context,
+                    title: 'Part Used',
+                    items: [herb.partUsed],
+                    icon: Icons.spa_outlined,
+                  ),
+                  _buildSection(
+                    context,
+                    title: 'Fast Facts',
+                    items: [herb.facts],
+                    icon: Icons.info_outline,
+                  ),
+                  _buildSection(
+                    context,
+                    title: 'Preparation',
+                    items: [herb.preparation],
+                    icon: Icons.local_drink_outlined,
+                  ),
+                  if (herb.uses.isNotEmpty)
                     _buildSection(
                       context,
-                      title: 'Health Benefits',
-                      items: herb.healthBenefits,
-                      icon: Icons.healing,
-                    ),
-                  if (herb.usage.isNotEmpty)
-                    _buildSection(
-                      context,
-                      title: 'Usage',
-                      items: herb.usage,
-                      icon: Icons.auto_awesome_mosaic_outlined,
+                      title: 'Common Uses',
+                      items: herb.uses,
+                      icon: Icons.healing_outlined,
                     ),
                 ],
               ),
@@ -100,8 +110,8 @@ class HerbDetailScreen extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon, color: Theme.of(context).primaryColor),
-            const SizedBox(width: 8),
+            Icon(icon, color: Theme.of(context).primaryColor, size: 28),
+            const SizedBox(width: 10),
             Text(
               title,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -110,21 +120,21 @@ class HerbDetailScreen extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 12),
         ...items.map((item) => Padding(
-              padding: const EdgeInsets.only(left: 32.0, bottom: 4.0),
+              padding: const EdgeInsets.only(left: 12.0, bottom: 8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('• ', style: TextStyle(fontSize: 16)),
+                  const Text('•  ', style: TextStyle(fontSize: 16, color: Colors.black87)),
                   Expanded(
                     child: Text(item,
-                        style: Theme.of(context).textTheme.bodyMedium),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5)),
                   ),
                 ],
               ),
             )),
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/providers/favorite_provider.dart';
+import 'package:myapp/providers/herbs_provider.dart';
 import 'package:myapp/widgets/bottom_nav_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -13,8 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FavoriteProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => HerbsProvider()),
+        ChangeNotifierProxyProvider<HerbsProvider, FavoriteProvider>(
+          create: (_) => FavoriteProvider(allHerbs: []),
+          update: (_, herbsProvider, previousFavoriteProvider) =>
+              FavoriteProvider(allHerbs: herbsProvider.herbs),
+        ),
+      ],
       child: MaterialApp(
         title: 'HerbalDoc',
         theme: ThemeData(

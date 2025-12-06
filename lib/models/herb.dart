@@ -4,29 +4,32 @@ class Herb {
   final String id;
   final String name;
   final String scientificName;
-  final String description; // Renamed from 'facts' to be more descriptive
-  final List<String> healthBenefits; // Renamed from 'preparation'
-  final List<String> usage; // Renamed from 'uses'
+  final String partUsed;
+  final String facts;
+  final String preparation;
+  final List<String> uses;
   final String imageUrl;
 
   Herb({
     required this.id,
     required this.name,
     required this.scientificName,
-    required this.description,
-    required this.healthBenefits,
-    required this.usage,
+    required this.partUsed,
+    required this.facts,
+    required this.preparation,
+    required this.uses,
     required this.imageUrl,
   });
 
   factory Herb.fromJson(Map<String, dynamic> json) {
     return Herb(
-      id: json['id'] as String, // Assuming id is a string in the JSON
+      id: json['id'] as String,
       name: json['name'] as String,
       scientificName: json['scientific_name'] as String,
-      description: json['description'] as String,
-      healthBenefits: List<String>.from(json['health_benefits'] as List),
-      usage: List<String>.from(json['usage'] as List),
+      partUsed: json['part_used'] as String,
+      facts: json['facts'] as String,
+      preparation: json['preparation'] as String,
+      uses: List<String>.from(json['uses'] as List),
       imageUrl: json['imageUrl'] as String,
     );
   }

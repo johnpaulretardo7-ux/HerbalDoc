@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/screens/home_screen.dart';
-import 'package:myapp/screens/about_screen.dart';
 import 'package:myapp/screens/favorites_screen.dart';
+import 'package:myapp/screens/home_screen.dart';
 
 class BottomNavHandler extends StatefulWidget {
   const BottomNavHandler({super.key});
 
   @override
-  State<BottomNavHandler> createState() => _BottomNavHandlerState();
+  BottomNavHandlerState createState() => BottomNavHandlerState();
 }
 
-class _BottomNavHandlerState extends State<BottomNavHandler> {
-  int _selectedIndex = 0;
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    FavoritesScreen(),
-    AboutScreen(),
+class BottomNavHandlerState extends State<BottomNavHandler> {
+  int _currentIndex = 0;
+  final List<Widget> _screens = [
+    const HomeScreen(),
+    const FavoritesScreen(),
   ];
 
-  void _onItemTapped(int index) {
+  void _onTabTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _currentIndex = index;
     });
   }
 
@@ -29,26 +26,24 @@ class _BottomNavHandlerState extends State<BottomNavHandler> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: _selectedIndex,
-        children: _widgetOptions,
+        index: _currentIndex,
+        children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        onTap: _onTabTapped,
+        currentIndex: _currentIndex,
+        items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt),
+            icon: Icon(Icons.favorite_border),
+            activeIcon: Icon(Icons.favorite),
             label: 'My List',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info_outline),
-            label: 'About',
-          ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }

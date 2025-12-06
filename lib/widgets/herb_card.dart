@@ -28,60 +28,52 @@ class HerbCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Hero(
-                      tag: 'herb_image_${herb.id}',
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(15.0)),
-                        child: Image.asset(
-                          herb.imageUrl,
-                          fit: BoxFit.cover,
-                          // Show a placeholder if the image fails to load
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey[200],
-                              child: const Icon(Icons.grass,
-                                  size: 50, color: Colors.grey),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
+              child: Hero(
+                tag: 'herb_image_${herb.id}',
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(15.0)),
+                  child: Image.asset(
+                    herb.imageUrl,
+                    fit: BoxFit.cover,
+                    // Show a placeholder if the image fails to load
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[200],
+                        child: const Icon(Icons.grass,
+                            size: 50, color: Colors.grey),
+                      );
+                    },
                   ),
-                  Positioned(
-                    top: 8,
-                    right: 8,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: IconButton(
-                        icon: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: isFavorite ? Colors.red : Colors.white,
-                          size: 30,
-                        ),
-                        onPressed: () {
-                          final provider = Provider.of<FavoriteProvider>(
-                              context,
-                              listen: false);
-                          provider.toggleFavorite(herb);
-                        },
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                herb.name,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      herb.name,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 2, // Allow up to 2 lines for longer names
+                      overflow: TextOverflow.ellipsis,
                     ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.red : Colors.grey,
+                    ),
+                    onPressed: () {
+                      favoriteProvider.toggleFavorite(herb);
+                    },
+                  ),
+                ],
               ),
             ),
           ],
