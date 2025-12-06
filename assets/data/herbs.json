@@ -1,4 +1,3 @@
-
 {
     "herbs": [
         {
@@ -360,6 +359,46 @@
             "preparation": "Pakuluan ang dahon at gawing tsaa.",
             "uses": ["sakit ng tiyan", "ubo", "pagsusuka"],
             "imageUrl": "assets/images/atis_dahon.png"
+        },
+        {
+            "id": "herb_037",
+            "name": "Pandan",
+            "scientific_name": "Pandanus amaryllifolius",
+            "part_used": "Dahon",
+            "facts": "Nakakabawas ng high blood at nakakapag-relax ng katawan.",
+            "preparation": "Pakuluan at gawing pampabango o tsaa.",
+            "uses": ["high blood", "stress", "anxiety"],
+            "imageUrl": "assets/images/pandan.png"
+        },
+        {
+            "id": "herb_038",
+            "name": "Kugon",
+            "scientific_name": "Imperata cylindrica",
+            "part_used": "Ugat",
+            "facts": "Malakas na natural diuretic; pang-UTI at kidney cleansing.",
+            "preparation": "Pakuluan ang ugat at inumin.",
+            "uses": ["UTI", "pampaihi", "kidney cleansing"],
+            "imageUrl": "assets/images/kugon.png"
+        },
+        {
+            "id": "herb_039",
+            "name": "Katuray",
+            "scientific_name": "Sesbania grandiflora",
+            "part_used": "Bulaklak at Dahon",
+            "facts": "May anti-inflammatory at antioxidant benefits.",
+            "preparation": "Ihalo sa ginisang gulay o gawing tsaa.",
+            "uses": ["pamamaga", "lagnat", "antioxidant"],
+            "imageUrl": "assets/images/katuray.png"
+        },
+        {
+            "id": "herb_040",
+            "name": "Alugbati",
+            "scientific_name": "Basella alba",
+            "part_used": "Dahon",
+            "facts": "May cooling effect sa katawan at tumutulong sa constipation.",
+            "preparation": "Ihalo sa gulay o gawing sabaw.",
+            "uses": ["constipation", "lagnat", "pamamaga"],
+            "imageUrl": "assets/images/alugbati.png"
         }
     ]
 }

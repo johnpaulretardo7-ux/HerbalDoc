@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:myapp/models/herb.dart';
 import 'package:myapp/providers/herbs_provider.dart';
-import 'package:myapp/screens/herb_detail_screen.dart';
+import 'package:myapp/widgets/featured_herb_card.dart';
 import 'package:myapp/widgets/herb_card.dart';
 import 'package:provider/provider.dart';
 
@@ -9,158 +10,157 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  HomeScreenState createState() => HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
-  List<Herb> _filteredHerbs = [];
-  final TextEditingController _searchController = TextEditingController();
+class _HomeScreenState extends State<HomeScreen> {
+  String _searchQuery = '';
 
-  @override
-  void initState() {
-    super.initState();
-    _searchController.addListener(_onSearchChanged);
-  }
-
-  @override
-  void dispose() {
-    _searchController.removeListener(_onSearchChanged);
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final herbsProvider = Provider.of<HerbsProvider>(context, listen: false);
-    if (_searchController.text.isEmpty) {
-      _filteredHerbs = herbsProvider.herbs;
-    }
-  }
-
-  void _onSearchChanged() {
-    final herbsProvider = Provider.of<HerbsProvider>(context, listen: false);
-    final query = _searchController.text.toLowerCase();
+  void _onSearchChanged(String query) {
     setState(() {
-      if (query.isEmpty) {
-        _filteredHerbs = herbsProvider.herbs;
-      } else {
-        _filteredHerbs = herbsProvider.herbs.where((herb) {
-          return herb.name.toLowerCase().contains(query) ||
-              herb.scientificName.toLowerCase().contains(query) ||
-              herb.facts.toLowerCase().contains(query) ||
-              herb.preparation.toLowerCase().contains(query) ||
-              herb.uses.any((use) => use.toLowerCase().contains(query));
-        }).toList();
-      }
+      _searchQuery = query.toLowerCase();
     });
-  }
-
-  void _navigateToDetail(Herb herb) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HerbDetailScreen(herb: herb),
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     final herbsProvider = Provider.of<HerbsProvider>(context);
+    final List<Herb> allHerbs = herbsProvider.herbs;
+
+    final List<Herb> filteredHerbs = _searchQuery.isEmpty
+        ? allHerbs
+        : allHerbs.where((herb) {
+            return herb.name.toLowerCase().contains(_searchQuery) ||
+                herb.scientificName.toLowerCase().contains(_searchQuery) ||
+                herb.uses.any((use) => use.toLowerCase().contains(_searchQuery));
+          }).toList();
+
+    final Herb? featuredHerb = allHerbs.isNotEmpty ? allHerbs[0] : null;
 
     if (herbsProvider.isLoading) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('HerbalDoc')),
-        body: const Center(child: CircularProgressIndicator()),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
 
     if (herbsProvider.error != null) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('HerbalDoc')),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.error_outline, color: Colors.red, size: 60),
-                const SizedBox(height: 20),
-                const Text(
-                  'Oops, something went wrong!',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  herbsProvider.error!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.grey[700]),
-                ),
-              ],
-            ),
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, color: Colors.red, size: 60),
+              const SizedBox(height: 20),
+              Text(
+                'Oops, something went wrong!',
+                style: Theme.of(context).textTheme.headlineSmall,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                herbsProvider.error!,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
           ),
         ),
       );
     }
 
-    // Update filtered herbs only when the list is successfully loaded and not searching
-    if (_searchController.text.isEmpty) {
-      _filteredHerbs = herbsProvider.herbs;
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HerbalDoc'),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          backgroundColor: Colors.green[800],
+          pinned: true,
+          floating: true,
+          expandedHeight: 200.0,
+          flexibleSpace: FlexibleSpaceBar(
+            titlePadding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+            title: Text(
+              'HerbalDoc',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            background: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.green.shade800,
+                    Colors.green.shade600,
+                    Colors.teal.shade400,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: Image.asset(
+                'assets/images/herbal_logo.png', 
+                fit: BoxFit.cover,
+                color: Colors.black.withAlpha(26),
+              ),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
             child: TextField(
-              controller: _searchController,
+              onChanged: _onSearchChanged,
               decoration: InputDecoration(
-                hintText: 'Search by name or symptom (e.g., ubo)',
-                prefixIcon: const Icon(Icons.search),
+                hintText: 'Search for herbs or symptoms...',
+                prefixIcon: Icon(Icons.search, color: Colors.green[800]),
+                filled: true,
+                fillColor: Colors.white.withAlpha(230),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0),
                   borderSide: BorderSide.none,
                 ),
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.surface,
+                contentPadding: const EdgeInsets.symmetric(vertical: 14.0),
               ),
             ),
           ),
-          Expanded(
-            child: _filteredHerbs.isEmpty && _searchController.text.isNotEmpty
-                ? Center(
-                    child: Text(
-                      'No herbs found matching your search.',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  )
-                : GridView.builder(
-                    padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 12.0),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12.0,
-                      mainAxisSpacing: 12.0,
-                      childAspectRatio: 0.85,
-                    ),
-                    itemCount: _filteredHerbs.length,
-                    itemBuilder: (context, index) {
-                      final herb = _filteredHerbs[index];
-                      return GestureDetector(
-                        onTap: () => _navigateToDetail(herb),
-                        child: HerbCard(herb: herb),
-                      );
-                    },
-                  ),
+        ),
+        if (featuredHerb != null && _searchQuery.isEmpty)
+          SliverToBoxAdapter(
+            child: FeaturedHerbCard(herb: featuredHerb),
           ),
-        ],
-      ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+            child: Text(
+              _searchQuery.isEmpty ? 'All Herbs' : 'Search Results',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold, color: Colors.green[900]),
+            ),
+          ),
+        ),
+        filteredHerbs.isEmpty
+            ? SliverFillRemaining(
+                child: Center(
+                  child: Text(
+                    'No herbs found.',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              )
+            : SliverPadding(
+                padding: const EdgeInsets.all(16.0),
+                sliver: SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 0.8,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      return HerbCard(herb: filteredHerbs[index]);
+                    },
+                    childCount: filteredHerbs.length,
+                  ),
+                ),
+              ),
+      ],
     );
   }
 }

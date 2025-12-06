@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:myapp/models/herb.dart';
 import 'package:myapp/providers/favorite_provider.dart';
@@ -12,7 +13,7 @@ class HerbCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final favoriteProvider = Provider.of<FavoriteProvider>(context);
-    final isFavorite = favoriteProvider.isFavorite(herb);
+    final isFavorite = favoriteProvider.isFavorite(herb.id);
 
     return GestureDetector(
       onTap: () {
@@ -70,7 +71,7 @@ class HerbCard extends StatelessWidget {
                       color: isFavorite ? Colors.red : Colors.grey,
                     ),
                     onPressed: () {
-                      favoriteProvider.toggleFavorite(herb);
+                      favoriteProvider.toggleFavorite(herb.id);
                     },
                   ),
                 ],
