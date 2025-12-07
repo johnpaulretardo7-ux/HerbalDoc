@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/services/notification_service.dart';
@@ -14,7 +15,7 @@ class ReminderScreen extends StatefulWidget {
 
 class ReminderScreenState extends State<ReminderScreen> {
   TimeOfDay? _selectedTime;
-  final NotificationService _notificationService = NotificationService();
+  final NotificationService? _notificationService = kIsWeb ? null : NotificationService();
 
   void _selectTime() async {
     final TimeOfDay? pickedTime = await showTimePicker(
@@ -47,7 +48,7 @@ class ReminderScreenState extends State<ReminderScreen> {
 
     final reminderId = widget.herbName.hashCode;
 
-    _notificationService.scheduleNotification(
+    _notificationService?.scheduleNotification(
       id: reminderId,
       title: 'Time for your ${widget.herbName}!',
       body: 'It\'s time to take your herbal medicine.',
@@ -69,40 +70,51 @@ class ReminderScreenState extends State<ReminderScreen> {
       appBar: AppBar(
         title: Text('Set Reminder for ${widget.herbName}'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              _selectedTime == null
-                  ? 'No time selected'
-                  : 'Reminder will be set at: ${DateFormat.jm().format(DateTime(0, 0, 0, _selectedTime!.hour, _selectedTime!.minute))}',
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton.icon(
-              onPressed: _selectTime,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                textStyle: const TextStyle(fontSize: 18),
+      body: kIsWeb
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  'Reminders are only available on the mobile app.',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
               ),
-              icon: const Icon(Icons.alarm),
-              label: const Text('Select Time'),
-            ),
-            const SizedBox(height: 50),
-            ElevatedButton(
-              onPressed: _setReminder,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _selectedTime == null
+                        ? 'No time selected'
+                        : 'Reminder will be set at: ${DateFormat.jm().format(DateTime(0, 0, 0, _selectedTime!.hour, _selectedTime!.minute))}',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  ElevatedButton.icon(
+                    onPressed: _selectTime,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                      textStyle: const TextStyle(fontSize: 18),
+                    ),
+                    icon: const Icon(Icons.alarm),
+                    label: const Text('Select Time'),
+                  ),
+                  const SizedBox(height: 50),
+                  ElevatedButton(
+                    onPressed: _setReminder,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                      textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    child: const Text('Set Daily Reminder'),
+                  ),
+                ],
               ),
-              child: const Text('Set Daily Reminder'),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

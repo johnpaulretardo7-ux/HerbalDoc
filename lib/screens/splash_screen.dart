@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:myapp/providers/favorite_provider.dart';
+import 'package:myapp/providers/herbs_provider.dart';
 import 'package:myapp/screens/main_screen.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
+  String _loadingMessage = 'Initializing...';
 
   @override
   void initState() {
@@ -27,12 +31,43 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _animationController.forward();
 
-    Timer(
-      const Duration(seconds: 4),
-      () => Navigator.of(context).pushReplacement(
+    // Use WidgetsBinding to wait for the first frame to be rendered.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadDataAndNavigate();
+    });
+  }
+
+  Future<void> _loadDataAndNavigate() async {
+    // Check if the widget is still mounted before proceeding.
+    if (!mounted) return;
+
+    try {
+      // Get providers before the async gap.
+      final herbsProvider = Provider.of<HerbsProvider>(context, listen: false);
+      final favoriteProvider = Provider.of<FavoriteProvider>(context, listen: false);
+
+      // Use Future.wait to load all necessary data concurrently.
+      await Future.wait([
+        herbsProvider.loadHerbs(),
+        favoriteProvider.loadFavorites(),
+      ]);
+
+      // After the await, check if the widget is still mounted before using context.
+      if (!mounted) return;
+
+      // If data loading is successful, navigate to the main screen.
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => const MainScreen()),
-      ),
-    );
+      );
+    } catch (e) {
+      // After the await (in the catch block), check if the widget is still mounted.
+      if (!mounted) return;
+      
+      // If there's an error, show it on the splash screen.
+      setState(() {
+        _loadingMessage = 'Failed to load data. Please restart the app.';
+      });
+    }
   }
 
   @override
@@ -83,6 +118,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   ),
                   const SizedBox(height: 60),
                   const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                  const SizedBox(height: 20),
+                  Text(
+                    _loadingMessage,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),
+                  ),
                 ],
               ),
             ),

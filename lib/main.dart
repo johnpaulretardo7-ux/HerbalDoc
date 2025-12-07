@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/providers/favorite_provider.dart';
@@ -10,7 +11,9 @@ import 'package:provider/provider.dart';
 
 void main() async { // Make main async
   WidgetsFlutterBinding.ensureInitialized(); // Ensure binding is initialized
-  await NotificationService().init(); // Initialize NotificationService
+  if (!kIsWeb) {
+    await NotificationService().init(); // Initialize NotificationService
+  }
   runApp(
     MultiProvider(
       providers: [

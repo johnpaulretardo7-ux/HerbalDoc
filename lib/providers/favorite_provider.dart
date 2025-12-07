@@ -9,10 +9,10 @@ class FavoriteProvider with ChangeNotifier {
   List<String> get favoriteIds => _favoriteIds;
 
   FavoriteProvider() {
-    _loadFavorites();
+    loadFavorites();
   }
 
-  Future<void> _loadFavorites() async {
+  Future<void> loadFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     _favoriteIds = prefs.getStringList(_favoritesKey) ?? [];
     notifyListeners();

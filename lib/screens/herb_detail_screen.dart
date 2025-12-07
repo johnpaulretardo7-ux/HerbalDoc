@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/models/herb.dart';
 import 'package:myapp/providers/favorite_provider.dart';
@@ -32,17 +33,18 @@ class HerbDetailScreen extends StatelessWidget {
             expandedHeight: 300.0,
             pinned: true,
             actions: [
-              IconButton(
-                icon: const Icon(Icons.alarm),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ReminderScreen(herbName: herb.name),
-                    ),
-                  );
-                },
-              ),
+              if (!kIsWeb)
+                IconButton(
+                  icon: const Icon(Icons.alarm),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReminderScreen(herbName: herb.name),
+                      ),
+                    );
+                  },
+                ),
             ],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(herb.name,
