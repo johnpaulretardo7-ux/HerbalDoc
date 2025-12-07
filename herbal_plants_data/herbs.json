@@ -1,0 +1,224 @@
+{
+    "herbs": [
+        {
+            "id": "herb_001",
+            "name": "Lagundi",
+            "scientific_name": "Vitex negundo",
+            "part_used": "Dahon at Tangkay",
+            "facts": "Epektibo para sa ubo, hika, at pananakit ng katawan. May anti-inflammatory properties.",
+            "preparation": "Pakuluan ang 5–7 dahon sa 2 tasang tubig sa loob ng 10 minuto.",
+            "uses": ["ubo", "hika", "lagnat", "trangkaso", "pananakit ng katawan", "asthma"],
+            "imageUrl": "assets/images/lagundi.png"
+        },
+        {
+            "id": "herb_002",
+            "name": "Sambong",
+            "scientific_name": "Blumea balsamifera",
+            "part_used": "Dahon",
+            "facts": "Ginagamit bilang pampaihi (diuretic), pang-UTI, at sa pagtunaw ng kidney stones.",
+            "preparation": "Pakuluan ang 5–6 dahon sa 2 tasang tubig sa 10–15 minuto.",
+            "uses": ["UTI", "kidney stones", "pampaihi", "bato sa bato", "urinary tract infection"],
+            "imageUrl": "assets/images/sambong.png"
+        },
+        {
+            "id": "herb_003",
+            "name": "Bayabas (Dahon)",
+            "scientific_name": "Psidium guajava",
+            "part_used": "Dahon",
+            "facts": "Dahon ng bayabas ay mayaman sa antibacterial properties. Mabisa para sa pagtatae (diarrhea) at panglinis ng sugat.",
+            "preparation": "Pakuluan ang 7 dahon sa 2 tasang tubig ng 10 minuto.",
+            "uses": ["pagtatae", "diarrhea", "sugat", "antiseptic", "galis"],
+            "imageUrl": "assets/images/bayabas.png"
+        },
+        {
+            "id": "herb_004",
+            "name": "Yerba Buena",
+            "scientific_name": "Clinopodium douglasii",
+            "part_used": "Dahon",
+            "facts": "Kilala bilang pain reliever. Mabisa para sa sakit ng ulo, sakit ng tiyan, at muscular pain.",
+            "preparation": "Pakuluan ang 5 dahon o nguyain ang sariwang dahon.",
+            "uses": ["sakit ng ulo", "sakit ng tiyan", "pananakit ng kalamnan", "kagat ng insekto", "rayuma"],
+            "imageUrl": "assets/images/yerba_buena.png"
+        },
+        {
+            "id": "herb_005",
+            "name": "Oregano",
+            "scientific_name": "Origanum vulgare",
+            "part_used": "Dahon",
+            "facts": "Malakas na natural antibiotic laban sa ubo, plema, sipon, at sore throat.",
+            "preparation": "Durugin at pigain ang katas o pakuluan sa tubig.",
+            "uses": ["ubo", "sipon", "sore throat", "plema", "hika"],
+            "imageUrl": "assets/images/oregano.png"
+        },
+        {
+            "id": "herb_006",
+            "name": "Luya",
+            "scientific_name": "Zingiber officinale",
+            "part_used": "Ugat",
+            "facts": "Mabisa para sa sipon, ubo, sore throat, at kabag (gas pain).",
+            "preparation": "Pakuluan ang hiniwang luya sa tubig ng 10 minuto.",
+            "uses": ["sipon", "ubo", "sore throat", "kabag", "pagsusuka"],
+            "imageUrl": "assets/images/luya.png"
+        },
+        {
+            "id": "herb_007",
+            "name": "Tsaang Gubat",
+            "scientific_name": "Ehretia microphylla",
+            "part_used": "Dahon",
+            "facts": "Mabisa para sa pagtatae (diarrhea) at sakit ng tiyan (stomach ache). Isa ito sa 10 halamang gamot na inirerekomenda ng DOH.",
+            "preparation": "Pakuluan ang 1 tasa ng dahon sa tubig.",
+            "uses": ["pagtatae", "diarrhea", "sakit ng tiyan", "stomach ache", "gastroenteritis"],
+            "imageUrl": "assets/images/tsaang_gubat.png"
+        },
+        {
+            "id": "herb_008",
+            "name": "Akapulko",
+            "scientific_name": "Cassia alata",
+            "part_used": "Dahon",
+            "facts": "Epektibo laban sa fungal infections tulad ng an-an, buni, at alipunga.",
+            "preparation": "Dikdikin ang dahon at ipahid sa apektadong balat.",
+            "uses": ["an-an", "buni", "alipunga", "fungal infection", "galis"],
+            "imageUrl": "assets/images/akapulko.png"
+        },
+        {
+            "id": "herb_009",
+            "name": "Niyog-Niyogan",
+            "scientific_name": "Quisqualis indica",
+            "part_used": "Buto",
+            "facts": "Kilala bilang epektibong pampurga sa bulate (intestinal worms).",
+            "preparation": "Kainin ang 5–10 hinog na buto depende sa edad.",
+            "uses": ["bulate sa tiyan", "pampurga", "intestinal worms", "deworming"],
+            "imageUrl": "assets/images/niyogniyogan.png"
+        },
+        {
+            "id": "herb_010",
+            "name": "Banaba",
+            "scientific_name": "Lagerstroemia speciosa",
+            "part_used": "Dahon",
+            "facts": "Tumutulong sa pagpapababa ng blood sugar levels at pang-lunas sa UTI.",
+            "preparation": "Pakuluan ang dahon sa tubig at inumin.",
+            "uses": ["diabetes", "blood sugar", "UTI", "pampaihi"],
+            "imageUrl": "assets/images/banaba.png"
+        },
+        {
+            "id": "herb_011",
+            "name": "Malunggay",
+            "scientific_name": "Moringa oleifera",
+            "part_used": "Dahon",
+            "facts": "Superfood na mayaman sa bitamina. Mabisa para sa anemia, pampadami ng gatas ng ina, at pampalakas ng katawan.",
+            "preparation": "Ihalo sa pagkain o gawing tsaa ang dahon.",
+            "uses": ["anemia", "pampagatas", "malnutrition", "pampalakas"],
+            "imageUrl": "assets/images/malunggay.png"
+        },
+        {
+            "id": "herb_012",
+            "name": "Turmeric (Luyang Dilaw)",
+            "scientific_name": "Curcuma longa",
+            "part_used": "Ugat",
+            "facts": "May malakas na anti-inflammatory properties; mabisa sa arthritis, ubo, at kabag.",
+            "preparation": "Pakuluan ang hiniwang turmeric sa tubig.",
+            "uses": ["arthritis", "rayuma", "pamamaga", "ubo", "kabag"],
+            "imageUrl": "assets/images/turmeric.png"
+        },
+        {
+            "id": "herb_013",
+            "name": "Makabuhay",
+            "scientific_name": "Tinospora crispa",
+            "part_used": "Baging",
+            "facts": "Panglunas sa lagnat, trangkaso, at mga sakit sa balat tulad ng galis.",
+            "preparation": "Pakuluan ang baging sa tubig.",
+            "uses": ["lagnat", "trangkaso", "galis", "sakit sa balat", "pampalakas ng immune system"],
+            "imageUrl": "assets/images/makabuhay.png"
+        },
+        {
+            "id": "herb_014",
+            "name": "Atis (Dahon)",
+            "scientific_name": "Annona squamosa",
+            "part_used": "Dahon",
+            "facts": "Ginagamit para sa sakit ng tiyan, ubo, at pagsusuka.",
+            "preparation": "Pakuluan ang dahon at gawing tsaa.",
+            "uses": ["sakit ng tiyan", "ubo", "pagsusuka"],
+            "imageUrl": "assets/images/atis_dahon.png"
+        },
+        {
+            "id": "herb_015",
+            "name": "Pandan",
+            "scientific_name": "Pandanus amaryllifolius",
+            "part_used": "Dahon",
+            "facts": "Nakakabawas ng high blood at nakakapag-relax ng katawan.",
+            "preparation": "Pakuluan at gawing pampabango o tsaa.",
+            "uses": ["high blood", "stress", "anxiety"],
+            "imageUrl": "assets/images/pandan.png"
+        },
+        {
+            "id": "herb_016",
+            "name": "Kugon",
+            "scientific_name": "Imperata cylindrica",
+            "part_used": "Ugat",
+            "facts": "Malakas na natural diuretic; pang-UTI at kidney cleansing.",
+            "preparation": "Pakuluan ang ugat at inumin.",
+            "uses": ["UTI", "pampaihi", "kidney cleansing"],
+            "imageUrl": "assets/images/kugon.png"
+        },
+        {
+            "id": "herb_017",
+            "name": "Katuray",
+            "scientific_name": "Sesbania grandiflora",
+            "part_used": "Bulaklak at Dahon",
+            "facts": "May anti-inflammatory at antioxidant benefits.",
+            "preparation": "Ihalo sa ginisang gulay o gawing tsaa.",
+            "uses": ["pamamaga", "lagnat", "antioxidant"],
+            "imageUrl": "assets/images/katuray.png"
+        },
+        {
+            "id": "herb_018",
+            "name": "Alugbati",
+            "scientific_name": "Basella alba",
+            "part_used": "Dahon",
+            "facts": "May cooling effect sa katawan at tumutulong sa constipation.",
+            "preparation": "Ihalo sa gulay o gawing sabaw.",
+            "uses": ["constipation", "lagnat", "pamamaga"],
+            "imageUrl": "assets/images/alugbati.png"
+        },
+        {
+            "id": "herb_019",
+            "name": "Takip-Kohol",
+            "scientific_name": "Centella asiatica",
+            "part_used": "Dahon",
+            "facts": "Mabisa sa pagpapagaling ng sugat, pampatalas ng memorya, at anti-inflammatory.",
+            "preparation": "Gawing salad o pakuluan at gawing tsaa.",
+            "uses": ["memory booster", "sugat", "pamamaga", "stress"],
+            "imageUrl": "assets/images/takip_kohol.png"
+        },
+        {
+            "id": "herb_020",
+            "name": "Ulasimang Bato",
+            "scientific_name": "Peperomia pellucida",
+            "part_used": "Dahon",
+            "facts": "Tradisyonal na gamot sa gout, rayuma, at pamamaga ng kasu-kasuan.",
+            "preparation": "Kainin bilang salad o pakuluan.",
+            "uses": ["gout", "rayuma", "arthritis"],
+            "imageUrl": "assets/images/ulasmang_bato.png"
+        },
+        {
+            "id": "herb_021",
+            "name": "Ampalaya",
+            "scientific_name": "Momordica charantia",
+            "part_used": "Dahon, Bunga",
+            "facts": "Kilala sa pagpapababa ng blood sugar, mayaman sa bitamina at mineral.",
+            "preparation": "Gawing tsaa ang dahon o isama ang bunga sa lutuin.",
+            "uses": ["diabetes", "blood sugar", "pampagana", "pampababa ng kolesterol"],
+            "imageUrl": "assets/images/ampalaya.png"
+        },
+        {
+            "id": "herb_022",
+            "name": "Bawang",
+            "scientific_name": "Allium sativum",
+            "part_used": "Buto",
+            "facts": "Mabisa para sa high blood pressure, pampababa ng cholesterol, at may antibacterial properties.",
+            "preparation": "Kainin ng hilaw, isama sa lutuin, o gawing tsaa.",
+            "uses": ["high blood", "cholesterol", "altapresyon", "antibacterial"],
+            "imageUrl": "assets/images/bawang.png"
+        }
+    ]
+}

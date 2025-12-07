@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:myapp/models/herb.dart';
 import 'package:myapp/providers/favorite_provider.dart';
+import 'package:myapp/screens/reminder_screen.dart';
 import 'package:provider/provider.dart';
 
 class HerbDetailScreen extends StatelessWidget {
@@ -10,25 +12,42 @@ class HerbDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final favoriteProvider = Provider.of<FavoriteProvider>(context);
-    final isFavorite = favoriteProvider.isFavorite(herb.id);
-
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          favoriteProvider.toggleFavorite(herb.id);
+      floatingActionButton: Consumer<FavoriteProvider>(
+        builder: (context, favoriteProvider, child) {
+          final isFavorite = favoriteProvider.isFavorite(herb.id);
+          return FloatingActionButton(
+            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+            foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
+            onPressed: () {
+              favoriteProvider.toggleFavorite(herb.id);
+            },
+            child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+          );
         },
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
-        child: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
       ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             expandedHeight: 300.0,
             pinned: true,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.alarm),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ReminderScreen(herbName: herb.name),
+                    ),
+                  );
+                },
+              ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(herb.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+              title: Text(herb.name,
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
               background: Hero(
                 tag: 'herb_image_${herb.id}',
                 child: Image.asset(
@@ -51,7 +70,11 @@ class HerbDetailScreen extends StatelessWidget {
                       herb.scientificName,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontStyle: FontStyle.italic,
-                            color: Theme.of(context).textTheme.bodySmall?.color?.withAlpha(179),
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.color
+                                ?.withAlpha(179),
                           ),
                     ),
                     const SizedBox(height: 24),
@@ -91,7 +114,8 @@ class HerbDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(BuildContext context, {
+  Widget _buildSection(
+    BuildContext context, {
     required String title,
     required IconData icon,
     String? content,
@@ -109,7 +133,10 @@ class HerbDetailScreen extends StatelessWidget {
               const SizedBox(width: 12),
               Text(
                 title,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -117,26 +144,42 @@ class HerbDetailScreen extends StatelessWidget {
           isList
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: listContent!.map((item) => Padding(
-                    padding: const EdgeInsets.only(left: 12.0, bottom: 8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('•  ', style: TextStyle(fontSize: 16, color: Theme.of(context).textTheme.bodyLarge?.color)),
-                        Expanded(
-                          child: Text(item, style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5)),
-                        ),
-                      ],
-                    ),
-                  )).toList(),
+                  children: listContent!
+                      .map((item) => Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12.0, bottom: 8.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('•  ',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge
+                                            ?.color)),
+                                Expanded(
+                                  child: Text(item,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge
+                                          ?.copyWith(height: 1.5)),
+                                ),
+                              ],
+                            ),
+                          ))
+                      .toList(),
                 )
               : Padding(
-                padding: const EdgeInsets.only(left: 12.0),
-                child: Text(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Text(
                     content ?? '',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(height: 1.5),
                   ),
-              ),
+                ),
         ],
       ),
     );

@@ -5,9 +5,12 @@ import 'package:myapp/providers/favorite_provider.dart';
 import 'package:myapp/providers/herbs_provider.dart';
 import 'package:myapp/providers/theme_provider.dart';
 import 'package:myapp/screens/splash_screen.dart';
+import 'package:myapp/services/notification_service.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async { // Make main async
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure binding is initialized
+  await NotificationService().init(); // Initialize NotificationService
   runApp(
     MultiProvider(
       providers: [

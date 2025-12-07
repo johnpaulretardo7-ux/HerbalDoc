@@ -12,9 +12,6 @@ class HerbCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final favoriteProvider = Provider.of<FavoriteProvider>(context);
-    final isFavorite = favoriteProvider.isFavorite(herb.id);
-
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -25,53 +22,59 @@ class HerbCard extends StatelessWidget {
         );
       },
       child: Card(
+        clipBehavior: Clip.antiAlias, 
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 4,
+        shadowColor: Colors.black.withAlpha(51), // Deprecation fix
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Hero(
                 tag: 'herb_image_${herb.id}',
-                child: ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(15.0)),
-                  child: Image.asset(
-                    herb.imageUrl,
-                    fit: BoxFit.cover,
-                    // Show a placeholder if the image fails to load
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[200],
-                        child: const Icon(Icons.grass,
-                            size: 50, color: Colors.grey),
-                      );
-                    },
-                  ),
+                child: Image.asset(
+                  herb.imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.grey[200],
+                      child: const Icon(Icons.grass, size: 50, color: Colors.grey),
+                    );
+                  },
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Text(
                       herb.name,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      textAlign: TextAlign.left, // Align text to the left
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
-                      maxLines: 2, // Allow up to 2 lines for longer names
+                      maxLines: 2, 
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      isFavorite ? Icons.favorite : Icons.favorite_border,
-                      color: isFavorite ? Colors.red : Colors.grey,
-                    ),
-                    onPressed: () {
-                      favoriteProvider.toggleFavorite(herb.id);
+                  Consumer<FavoriteProvider>(
+                    builder: (context, favoriteProvider, child) {
+                       final isFavorite = favoriteProvider.isFavorite(herb.id);
+                       return IconButton(
+                         icon: Icon(
+                           isFavorite ? Icons.favorite : Icons.favorite_border,
+                           color: isFavorite ? Colors.redAccent : Colors.grey[400],
+                         ),
+                         onPressed: () {
+                           favoriteProvider.toggleFavorite(herb.id);
+                         },
+                       );
                     },
                   ),
                 ],
