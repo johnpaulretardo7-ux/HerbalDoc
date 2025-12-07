@@ -348,7 +348,7 @@
             "facts": "Tradisyonal na gamot sa gout, rayuma, at pamamaga ng kasu-kasuan.",
             "preparation": "Kainin bilang salad o pakuluan.",
             "uses": ["gout", "rayuma", "arthritis"],
-            "imageUrl": "assets/images/ulasmang_bato.png"
+            "imageUrl": "assets/images/ulasimang_bato.png"
         },
         {
             "id": "herb_036",
@@ -358,7 +358,7 @@
             "facts": "Ginagamit para sa sakit ng tiyan, ubo, at pagsusuka.",
             "preparation": "Pakuluan ang dahon at gawing tsaa.",
             "uses": ["sakit ng tiyan", "ubo", "pagsusuka"],
-            "imageUrl": "assets/images/atis_dahon.png"
+            "imageUrl": "assets/images/atis.png"
         },
         {
             "id": "herb_037",
