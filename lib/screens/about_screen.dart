@@ -14,66 +14,66 @@ class AboutScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('About HerbalDoc'),
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  Image.asset('assets/mortar.png', height: 100), 
-                  const SizedBox(height: 16),
-                  Text(
-                    'HerbalDoc',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Version 1.0.0', 
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
+        children: [
+          Center(
+            child: Column(
+              children: [
+                Image.asset('assets/images/herbal_logo.png', height: 100),
+                const SizedBox(height: 16),
+                Text(
+                  'HerbalDoc',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Version 1.0.0',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
             ),
-            const SizedBox(height: 32),
-            Text(
-              'Your pocket guide to the world of medicinal plants. Discover traditional knowledge, backed by modern science, to help you make informed decisions about your health.',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5),
-              textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 32),
+          Text(
+            'Your pocket guide to the world of medicinal plants. Discover traditional knowledge, backed by modern science, to help you make informed decisions about your health.',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          const Divider(),
+          const SizedBox(height: 16),
+          Text(
+            'Appearance',
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Dark Mode'),
+            subtitle: const Text('Reduce glare and improve night viewing.'),
+            trailing: Switch(
+              value: themeProvider.themeMode == ThemeMode.dark,
+              onChanged: (value) {
+                themeProvider.toggleTheme();
+              },
             ),
-            const SizedBox(height: 24),
-            const Divider(),
-            const SizedBox(height: 16),
-             Text(
-              'Appearance',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 24),
+          const Divider(),
+          const SizedBox(height: 16),
+          Center(
+            child: Text(
+              'Made by John Paul Retardo BSIT-CPT3',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
-            const SizedBox(height: 10),
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Dark Mode'),
-              subtitle: const Text('Reduce glare and improve night viewing.'),
-              trailing: Switch(
-                value: themeProvider.themeMode == ThemeMode.dark,
-                onChanged: (value) {
-                  themeProvider.toggleTheme();
-                },
-              ),
-            ),
-             const SizedBox(height: 24),
-            const Divider(),
-             const SizedBox(height: 16),
-             Center(
-              child: Text(
-                'Made with ❤️ in the Philippines',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ), 
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
