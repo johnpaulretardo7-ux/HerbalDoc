@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:myapp/providers/favorite_provider.dart';
@@ -12,9 +13,10 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
   String _loadingMessage = 'Initializing...';
 
   @override
@@ -22,52 +24,68 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1500),
+      duration: const Duration(milliseconds: 2000),
     );
-    _fadeAnimation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeIn,
+
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.5, 1.0, curve: Curves.easeIn),
+      ),
+    );
+
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
     );
 
     _animationController.forward();
 
-    // Use WidgetsBinding to wait for the first frame to be rendered.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadDataAndNavigate();
     });
   }
 
   Future<void> _loadDataAndNavigate() async {
-    // Check if the widget is still mounted before proceeding.
     if (!mounted) return;
 
     try {
-      // Get providers before the async gap.
-      final herbsProvider = Provider.of<HerbsProvider>(context, listen: false);
-      final favoriteProvider = Provider.of<FavoriteProvider>(context, listen: false);
-
-      // Use Future.wait to load all necessary data concurrently.
-      await Future.wait([
-        herbsProvider.loadHerbs(),
-        favoriteProvider.loadFavorites(),
+      final dataLoader = Future.wait([
+        _loadHerbs(),
+        _loadFavorites(),
+        Future.delayed(const Duration(milliseconds: 2500)),
       ]);
 
-      // After the await, check if the widget is still mounted before using context.
-      if (!mounted) return;
+      await dataLoader;
 
-      // If data loading is successful, navigate to the main screen.
+      if (!mounted) return;
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (BuildContext context) => const MainScreen()),
       );
     } catch (e) {
-      // After the await (in the catch block), check if the widget is still mounted.
       if (!mounted) return;
-      
-      // If there's an error, show it on the splash screen.
       setState(() {
         _loadingMessage = 'Failed to load data. Please restart the app.';
       });
     }
+  }
+
+  Future<void> _loadHerbs() async {
+    if (!mounted) return;
+    setState(() {
+      _loadingMessage = 'Loading herbal data...';
+    });
+    await Provider.of<HerbsProvider>(context, listen: false).loadHerbs();
+  }
+
+  Future<void> _loadFavorites() async {
+    if (!mounted) return;
+    setState(() {
+      _loadingMessage = 'Syncing favorites...';
+    });
+    await Provider.of<FavoriteProvider>(context, listen: false).loadFavorites();
   }
 
   @override
@@ -95,36 +113,68 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               ),
             ),
           ),
+          // Noise texture - Uncomment this when you add a noise.png to assets/images
+          // Container(
+          //   decoration: const BoxDecoration(
+          //     image: DecorationImage(
+          //       image: AssetImage('assets/images/noise.png'),
+          //       fit: BoxFit.cover,
+          //       opacity: 0.05,
+          //     ),
+          //   ),
+          // ),
           Center(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/herbal_logo.png', height: 180),
-                  const SizedBox(height: 24),
-                  Text(
-                    'HerbalDoc',
-                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          shadows: [Shadow(blurRadius: 10.0, color: Colors.black.withAlpha(77))]
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: Image.asset('assets/images/herbal_logo.png', height: 180),
+                ),
+                const SizedBox(height: 24),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Column(
+                    children: [
+                      Text(
+                        'HerbalDoc',
+                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  color: Colors.black.withAlpha(77),
+                                )
+                              ],
+                            ),
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'Your Pocket Guide to Herbal Plants',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white70,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 60),
+                const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  strokeWidth: 3.0,
+                ),
+                const SizedBox(height: 20),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Text(
+                    _loadingMessage,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.white70,
                         ),
                   ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Your Pocket Guide to Herbal Plants',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70),
-                  ),
-                  const SizedBox(height: 60),
-                  const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
-                  const SizedBox(height: 20),
-                  Text(
-                    _loadingMessage,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
