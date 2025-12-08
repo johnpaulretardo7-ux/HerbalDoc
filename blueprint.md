@@ -1,4 +1,3 @@
-
 # HerbalDoc App Blueprint
 
 ## **Project Overview**
@@ -15,6 +14,7 @@ Ang HerbalDoc ay isang mobile application na naglalayong magbigay ng impormasyon
 ### **2. User Interface (UI) & User Experience (UX)**
 *   **Animated Splash Screen:** Isang loading screen na may fade-in animation at custom na icon na ipinapakita sa pagbukas ng app.
 *   **Immersive Detail Screen:** Ang `HerbDetailScreen` ay gumagamit ng `CustomScrollView` at `SliverAppBar` para sa isang immersive na karanasan, kung saan ang imahe ng halaman ay nagiging bahagi ng app bar.
+*   **Accessible Theme Toggle:** Isang icon button sa `AppBar` ng `HomeScreen` para madaling mapalitan ang Light at Dark mode.
 *   **Modern & Clean Design:** Ang app ay gumagamit ng malinis na layout, modernong mga component, at magandang visual hierarchy.
 *   **Floating Action Button (FAB):** Ang "favorite" button ay isang `FloatingActionButton` para sa madaling pag-access.
 *   **Custom Fonts (Google Fonts):** Gumagamit ng `google_fonts` para sa mas magandang typography.
@@ -33,8 +33,8 @@ Ang HerbalDoc ay isang mobile application na naglalayong magbigay ng impormasyon
 *   **User Notes:**
     *   Ang mga user ay maaaring magdagdag, mag-edit, at mag-delete ng kanilang sariling mga personal na tala sa bawat halaman.
     *   Ang mga tala ay naka-save sa isang local na SQLite database gamit ang `sqflite`.
-*   **About Screen & Theme Toggle:** 
-    *   Nagbibigay ng impormasyon tungkol sa app at naglalaman ng toggle para sa Dark/Light mode.
+*   **About Screen:** 
+    *   Nagbibigay ng detalyadong impormasyon tungkol sa app at sa misyon nito.
 
 ## **Development Plan**
 
@@ -45,16 +45,22 @@ Ang HerbalDoc ay isang mobile application na naglalayong magbigay ng impormasyon
         1.  **I-update ang `HomeScreen` UI:** Nagdagdag ng welcome header, "Featured Herb" card, at na-modernize ang search bar.
         2.  **Ipatupad ang Material 3 Theming:** Gumawa ng isang sentralisadong `ThemeData` para sa light/dark modes gamit ang `ColorScheme.fromSeed`.
         3.  **Refactor Code:** Inilipat ang `_buildFeaturedHerbCard` sa isang hiwalay na widget file.
-        4.  **Palitan ang Settings ng About:** Pinalitan ang `SettingsScreen` ng `AboutScreen`, inilipat ang theme toggle, at idinagdag ang impormasyon ng app.
+        4.  **Palitan ang Settings ng About:** Pinalitan ang `SettingsScreen` ng `AboutScreen` at idinagdag ang impormasyon ng app.
         5.  **Idagdag ang Splash Screen:** Gumawa ng loading screen na ipinapakita sa simula ng app.
         6.  **Pagandahin ang Splash Screen:** Pinalitan ang icon, idinagdag ang bagong imahe, at naglagay ng fade-in animation para sa mas modernong hitsura.
+        7.  **Ilipat ang Theme Toggle:** Inilipat ang Dark/Light mode toggle mula sa `AboutScreen` patungo sa `AppBar` ng `HomeScreen` para sa mas madaling pag-access.
 *   **Phase 2: Offline-First Features**
     *   **Goal:** Palakasin ang offline capabilities ng app.
     *   **Steps Completed:**
         1.  **Ipatupad ang User Notes:** Nagdagdag ng feature para makapag-imbak ng personal na mga tala ang mga user para sa bawat halaman gamit ang `sqflite`.
+*   **Phase 3: Data & Content Refinement**
+    *   **Goal:** Linisin at pagbutihin ang data at content ng app.
+    *   **Steps Completed:**
+        1.  **Tanggalin ang Hindi Kailangang Halaman:** Inalis ang "Tangisang Bayawak" at "Tubang Aso" mula sa `herbs.json`.
+        2.  **Pahabain ang About Screen Text:** Pinalitan ang text sa `AboutScreen` ng mas detalyado at komprehensibong paglalarawan.
 
 ### **Current Plan**
-*   **Phase 3: Advanced Features**
+*   **Phase 4: Advanced Features**
     *   **Goal:** Magdagdag ng mga advanced na feature para mapabuti ang user experience.
     *   **Potential Features:**
         *   **Reminders/Notifications:** Payagan ang mga user na mag-set ng mga paalala para sa paggamit ng mga halaman.

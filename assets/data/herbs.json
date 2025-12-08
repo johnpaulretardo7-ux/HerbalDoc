@@ -409,6 +409,16 @@
             "preparation": "Pakuluan ang dahon sa 2 tasang tubig ng 10 minuto.",
             "uses": ["ubo", "sipon", "sakit ng ulo", "pamamaga"],
             "imageUrl": "assets/images/patola.png"
+        },
+        {
+            "id": "herb_042",
+            "name": "Kalamansi",
+            "scientific_name": "Citrus microcarpa",
+            "part_used": "Bunga at Katas",
+            "facts": "Ginagamit bilang natural remedy sa ubo, sipon, sore throat, at pampalakas ng immune system. Mayaman sa Vitamin C at antioxidants.",
+            "preparation": "Pigain ang katas at inumin kasama ng honey o tubig. Maaari ring ihalo sa tsaa o juice.",
+            "uses": ["ubo", "sipon", "sore throat", "immune booster", "vitamin C source"],
+            "imageUrl": "assets/images/kalamansi.png"
         }
     ]
 }

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/models/herb.dart';
 import 'package:myapp/providers/herbs_provider.dart';
+import 'package:myapp/providers/theme_provider.dart';
 import 'package:myapp/widgets/featured_herb_card.dart';
 import 'package:myapp/widgets/herb_card.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final herbsProvider = Provider.of<HerbsProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final List<Herb> allHerbs = herbsProvider.herbs;
 
     final List<Herb> filteredHerbs = _searchQuery.isEmpty
@@ -79,6 +81,18 @@ class HomeScreenState extends State<HomeScreen> {
             pinned: true,
             floating: true,
             expandedHeight: 200.0,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  themeProvider.themeMode == ThemeMode.dark
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                ),
+                onPressed: () {
+                  themeProvider.toggleTheme();
+                },
+              ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               titlePadding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
               title: Text(

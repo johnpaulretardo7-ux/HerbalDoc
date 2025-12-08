@@ -1,15 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:myapp/providers/theme_provider.dart';
-import 'package:provider/provider.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('About HerbalDoc'),
@@ -38,31 +34,9 @@ class AboutScreen extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Text(
-            'Your pocket guide to the world of medicinal plants. Discover traditional knowledge, backed by modern science, to help you make informed decisions about your health.',
+            'Welcome to HerbalDoc, your comprehensive and user-friendly guide to the rich world of medicinal plants. Our mission is to bridge the gap between traditional herbal wisdom and modern scientific understanding, empowering you to make safe and informed health choices. Explore detailed profiles of various herbs, learn about their time-tested uses, and discover the preparations that have been passed down through generations. This app is intended for informational and educational purposes only and should not be considered a substitute for professional medical advice. Always consult with a qualified healthcare provider before using any herbal remedies.',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5),
             textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 24),
-          const Divider(),
-          const SizedBox(height: 16),
-          Text(
-            'Appearance',
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('Dark Mode'),
-            subtitle: const Text('Reduce glare and improve night viewing.'),
-            trailing: Switch(
-              value: themeProvider.themeMode == ThemeMode.dark,
-              onChanged: (value) {
-                themeProvider.toggleTheme();
-              },
-            ),
           ),
           const SizedBox(height: 24),
           const Divider(),
