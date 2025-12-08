@@ -6,45 +6,73 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('About HerbalDoc'),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
         children: [
           Center(
             child: Column(
               children: [
                 Image.asset('assets/images/herbal_logo.png', height: 100),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 Text(
                   'HerbalDoc',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                  style: textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 4),
                 Text(
                   'Version 1.0.0',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: textTheme.bodyMedium,
                 ),
               ],
             ),
           ),
           const SizedBox(height: 32),
-          Text(
-            'Welcome to HerbalDoc, your comprehensive and user-friendly guide to the rich world of medicinal plants. Our mission is to bridge the gap between traditional herbal wisdom and modern scientific understanding, empowering you to make safe and informed health choices. Explore detailed profiles of various herbs, learn about their time-tested uses, and discover the preparations that have been passed down through generations. This app is intended for informational and educational purposes only and should not be considered a substitute for professional medical advice. Always consult with a qualified healthcare provider before using any herbal remedies.',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.5),
-            textAlign: TextAlign.center,
+          // Using a Column for better paragraph spacing
+          Column(
+            children: [
+              Text(
+                'Hey there! Welcome to HerbalDoc.',
+                style: textTheme.titleLarge?.copyWith(height: 1.5),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'This app was born from a deep respect for the power of nature and the timeless wisdom passed down through generations. Our goal is to help you explore the world of medicinal plants in a way that\'s modern, friendly, and easy to understand.',
+                style: textTheme.bodyLarge?.copyWith(height: 1.6),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Dive in to discover different herbs, learn about their traditional uses, and see how they\'ve been prepared for centuries.',
+                style: textTheme.bodyLarge?.copyWith(height: 1.6),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Just a friendly reminder: Your health is our top priority. This app is for informational purposes only. It\'s always best to chat with a doctor or a qualified healthcare professional before trying any herbal remedies.',
+                style: textTheme.bodyMedium?.copyWith(
+                  height: 1.5,
+                  fontStyle: FontStyle.italic,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 32),
           const Divider(),
-          const SizedBox(height: 16),
+          const SizedBox(height: 24),
           Center(
             child: Text(
               'Made by John Paul Retardo BSIT-CPT3',
-              style: Theme.of(context).textTheme.bodySmall,
+              style: textTheme.bodySmall,
             ),
           ),
         ],
