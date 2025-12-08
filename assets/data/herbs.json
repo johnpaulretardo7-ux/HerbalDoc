@@ -399,6 +399,16 @@
             "preparation": "Ihalo sa gulay o gawing sabaw.",
             "uses": ["constipation", "lagnat", "pamamaga"],
             "imageUrl": "assets/images/alugbati.png"
+        },
+        {
+            "id": "herb_041",
+            "name": "Patola (Dahon)",
+            "scientific_name": "Luffa acutangula",
+            "part_used": "Dahon",
+            "facts": "Tradisyonal na ginagamit para sa ubo, sipon, at pananakit ng ulo.",
+            "preparation": "Pakuluan ang dahon sa 2 tasang tubig ng 10 minuto.",
+            "uses": ["ubo", "sipon", "sakit ng ulo", "pamamaga"],
+            "imageUrl": "assets/images/patola.png"
         }
     ]
 }
