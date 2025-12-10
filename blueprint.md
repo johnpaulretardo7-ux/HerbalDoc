@@ -12,6 +12,7 @@ Ang HerbalDoc ay isang mobile application na naglalayong magbigay ng impormasyon
 *   **Model-View-ViewModel (MVVM) like architecture:** Hinihiwalay ang UI (Views) sa business logic (Providers/ViewModels).
 
 ### **2. User Interface (UI) & User Experience (UX)**
+*   **Technology-Themed Pre-loading Screen:** Isang modernong splash screen na may animated na gradient background, glowing logo, at futuristic na font. Ipinapakita nito ang logo ng "Technovators 2025-26" sa loob ng 3 segundo.
 *   **Animated Splash Screen:** Isang loading screen na may fade-in animation at custom na icon na ipinapakita sa pagbukas ng app.
 *   **Immersive Detail Screen:** Ang `HerbDetailScreen` ay gumagamit ng `CustomScrollView` at `SliverAppBar` para sa isang immersive na karanasan, kung saan ang imahe ng halaman ay nagiging bahagi ng app bar.
 *   **Accessible Theme Toggle:** Isang icon button sa `AppBar` ng `HomeScreen` para madaling mapalitan ang Light at Dark mode.
@@ -34,7 +35,7 @@ Ang HerbalDoc ay isang mobile application na naglalayong magbigay ng impormasyon
     *   Ang mga user ay maaaring magdagdag, mag-edit, at mag-delete ng kanilang sariling mga personal na tala sa bawat halaman.
     *   Ang mga tala ay naka-save sa isang local na SQLite database gamit ang `sqflite`.
 *   **About Screen:** 
-    *   Nagbibigay ng detalyadong impormasyon tungkol sa app at sa misyon nito.
+    *   Nagbibigay ng detalyadong impormasyon tungkol sa app, sa misyon nito, at sa may-akda, kasama ang larawan.
 
 ## **Development Plan**
 
@@ -60,7 +61,10 @@ Ang HerbalDoc ay isang mobile application na naglalayong magbigay ng impormasyon
         2.  **Pahabain ang About Screen Text:** Pinalitan ang text sa `AboutScreen` ng mas detalyado at komprehensibong paglalarawan.
 
 ### **Current Plan**
-*   **Phase 4: Advanced Features**
-    *   **Goal:** Magdagdag ng mga advanced na feature para mapabuti ang user experience.
+*   **Phase 4: App Information & Polish**
+    *   **Goal:** I-finalize ang impormasyon ng app at pagandahin pa ang UI.
+    *   **Steps Completed:**
+        1.  **Magdagdag ng Pre-loading Splash Screen:** Gumawa ng isang splash screen na may "technology" theme, na nagpapakita ng logo ng "Technovators 2025-26" sa loob ng 3 segundo.
+        2.  **I-update ang `AboutScreen`:** Nagdagdag ng section para sa impormasyon ng may-akda, kasama ang larawan at mga detalye.
     *   **Potential Features:**
         *   **Reminders/Notifications:** Payagan ang mga user na mag-set ng mga paalala para sa paggamit ng mga halaman.

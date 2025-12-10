@@ -61,11 +61,59 @@ class AboutScreen extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 24),
           Center(
-            child: Text(
-              'Made by John Paul Retardo BSIT-CPT3',
-              style: textTheme.bodySmall,
+            child: Column(
+              children: [
+                Text(
+                  'About the Author',
+                  style: textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                const CircleAvatar(
+                  radius: 70,
+                  backgroundImage: AssetImage('assets/images/author_pic.png'),
+                  backgroundColor: Colors.transparent,
+                ),
+                const SizedBox(height: 24),
+                _buildAuthorInfo(context, 'Name:', 'John Paul Retardo'),
+                const SizedBox(height: 8),
+                _buildAuthorInfo(context, 'Address:', 'Brgy. Bantad, Gumaca, Quezon'),
+                const SizedBox(height: 8),
+                _buildAuthorInfo(context, 'Age:', '20 years old'),
+                const SizedBox(height: 8),
+                _buildAuthorInfo(context, 'Course:', 'Bachelor of Science in Industrial Technology (BSIT)'),
+                const SizedBox(height: 8),
+                _buildAuthorInfo(context, 'Year Level:', '3rd Year'),
+                const SizedBox(height: 24),
+                Text(
+                  '“Don’t stop when you are tired, stop when you are done.”',
+                  style: textTheme.bodyLarge?.copyWith(
+                    fontStyle: FontStyle.italic,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ),
+          const SizedBox(height: 32),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAuthorInfo(BuildContext context, String label, String value) {
+    final textTheme = Theme.of(context).textTheme;
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        style: textTheme.bodyLarge?.copyWith(height: 1.5),
+        children: [
+          TextSpan(
+            text: '$label ',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          TextSpan(text: value),
         ],
       ),
     );

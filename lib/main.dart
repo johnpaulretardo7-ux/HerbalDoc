@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/providers/favorite_provider.dart';
 import 'package:myapp/providers/herbs_provider.dart';
 import 'package:myapp/providers/theme_provider.dart';
-import 'package:myapp/screens/splash_screen.dart';
+import 'package:myapp/screens/technovators_splash_screen.dart';
 import 'package:myapp/services/notification_service.dart';
 import 'package:provider/provider.dart';
 
@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: themeProvider.themeMode,
-          home: const SplashScreen(),
+          home: const TechnovatorsSplashScreen(),
         );
       },
     );

@@ -28,6 +28,8 @@ flutter:
   assets:
     - assets/data/
     - assets/images/
+    - assets/images/technovators_logo.png
+    - assets/images/author_pic.png
 
 flutter_launcher_icons:
   android: "launcher_icon"
