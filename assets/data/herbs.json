@@ -419,6 +419,86 @@
             "preparation": "Pigain ang katas at inumin kasama ng honey o tubig. Maaari ring ihalo sa tsaa o juice.",
             "uses": ["ubo", "sipon", "sore throat", "immune booster", "vitamin C source"],
             "imageUrl": "assets/images/kalamansi.png"
+        },
+        {
+            "id": "herb_043",
+            "name": "Gumamela",
+            "scientific_name": "Hibiscus rosa-sinensis",
+            "part_used": "Bulaklak at Dahon",
+            "facts": "Kilalang-kilala bilang pampahinog ng pigsa at lunas sa beke (mumps).",
+            "preparation": "Dikdikin ang bulaklak at dahon hanggang maging pino at itapal sa namamagang bahagi.",
+            "uses": ["pigsa", "beke", "boils", "mumps", "pamamaga"],
+            "imageUrl": "assets/images/gumamela.png"
+        },
+        {
+            "id": "herb_044",
+            "name": "Mayana",
+            "scientific_name": "Coleus blumei",
+            "part_used": "Dahon",
+            "facts": "Mabisa para sa mga pasa, bukol, at sakit ng ulo. May anti-inflammatory properties.",
+            "preparation": "Painitin ng bahagya ang dahon at itapal sa pasa, o dikdikin at ipahid ang katas.",
+            "uses": ["pasa", "bukol", "sakit ng ulo", "pilay", "pamamaga"],
+            "imageUrl": "assets/images/mayana.png"
+        },
+        {
+            "id": "herb_045",
+            "name": "Kamias",
+            "scientific_name": "Averrhoa bilimbi",
+            "part_used": "Dahon at Bunga",
+            "facts": "Ang dahon ay mainam sa pangangati ng balat at ang bunga ay ginagamit sa ubo.",
+            "preparation": "Pakuluan ang dahon para ipangligo sa makating balat o kainin ang bunga na may asin.",
+            "uses": ["kati sa balat", "ubo", "pangangati", "pamamaga ng balat"],
+            "imageUrl": "assets/images/kamias.png"
+        },
+        {
+            "id": "herb_046",
+            "name": "Sampaguita",
+            "scientific_name": "Jasminum sambac",
+            "part_used": "Bulaklak at Dahon",
+            "facts": "Ginagamit bilang pampababa ng lagnat at lunas sa ubo at sipon.",
+            "preparation": "Pakuluan ang bulaklak at gawing tsaa o inumin.",
+            "uses": ["lagnat", "ubo", "sipon"],
+            "imageUrl": "assets/images/sampaguita.png"
+        },
+        {
+            "id": "herb_047",
+            "name": "Tubang Aso",
+            "scientific_name": "Croton tiglium",
+            "part_used": "Buto at Dahon",
+            "facts": "Ang mga buto ay tradisyonal na ginagamit bilang malakas na pampurga (laxative) at pampasuka. Ang dahon ay ginagamit laban sa kagat ng insekto at sakit sa balat.",
+            "preparation": "BABALA: Napakalakas at nakakalason. Ginagamit lang sa sobrang liit na dosis o pang-tapal sa labas. Ipakonsulta sa herbalist bago gamitin.",
+            "uses": ["pampurga", "pampasuka", "sakit sa balat", "kagat ng insekto"],
+            "imageUrl": "assets/images/tubang_aso.png"
+        },
+        {
+            "id": "herb_048",
+            "name": "Kamote (Sweet Potato)",
+            "scientific_name": "Ipomoea batatas",
+            "part_used": "Ugat, Dahon, at Katas",
+            "facts": "Mayaman sa bitamina at fiber. Ang dahon ay ginagamit para sa diabetes, at ang ugat ay pampadami ng gatas ng ina.",
+            "preparation": "Pakuluan ang dahon at inumin ang sabaw, o kainin ang inihaw/nilagang ugat.",
+            "uses": ["diabetes", "pampagatas", "hirap sa pagdumi", "panunaw", "anemia"],
+            "imageUrl": "assets/images/kamote.png"
+        },
+        {
+            "id": "herb_049",
+            "name": "Paragis",
+            "scientific_name": "Eleusine indica",
+            "part_used": "Buong Halaman (Ugat at Dahon)",
+            "facts": "Kilalang-kilala bilang panggamot sa maraming karamdaman, lalo na sa kidney problems, high blood, at diabetes. Tinaguriang 'Miracle Grass'.",
+            "preparation": "Pakuluan ang buong halaman (kasama ang ugat) sa tubig sa loob ng 10–15 minuto. Inumin bilang tsaa.",
+            "uses": ["bato sa bato", "high blood", "diabetes", "pampaihi", "hika", "pilay"],
+            "imageUrl": "assets/images/paragis.png"
+        },
+        {
+            "id": "herb_050",
+            "name": "Bituon",
+            "scientific_name": "Barringtonia asiatica",
+            "part_used": "Buto at Bunga",
+            "facts": "Ang pinagdikdik na buto ay tradisyonal na ginagamit bilang pang-tapal sa kulani, goiter, luslos, almoranas, at iba pang bukol. May toxic properties kaya panlabas lang ang gamit.",
+            "preparation": "Kiskisin o dikdikin ang buto hanggang maging pino at ihalo sa langis (coconut oil) para ipang-tapal o ipahid sa bukol.",
+            "uses": ["kulani", "goiter", "luslos", "almoranas", "bukol", "pamamaga"],
+            "imageUrl": "assets/images/bituon.png"
         }
     ]
 }

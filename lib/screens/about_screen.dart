@@ -55,15 +55,6 @@ class AboutScreen extends StatelessWidget {
                 style: textTheme.bodyLarge?.copyWith(height: 1.6),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 24),
-              Text(
-                'Just a friendly reminder: Your health is our top priority. This app is for informational purposes only. It\'s always best to chat with a doctor or a qualified healthcare professional before trying any herbal remedies.',
-                style: textTheme.bodyMedium?.copyWith(
-                  height: 1.5,
-                  fontStyle: FontStyle.italic,
-                ),
-                textAlign: TextAlign.center,
-              ),
             ],
           ),
           const SizedBox(height: 32),

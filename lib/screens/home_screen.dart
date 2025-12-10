@@ -28,6 +28,7 @@ class HomeScreenState extends State<HomeScreen> {
     final herbsProvider = Provider.of<HerbsProvider>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
     final List<Herb> allHerbs = herbsProvider.herbs;
+    final theme = Theme.of(context); // Get the theme for easier access
 
     final List<Herb> filteredHerbs = _searchQuery.isEmpty
         ? allHerbs
@@ -57,14 +58,14 @@ class HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
                 Text(
                   'Oops, something went wrong!',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: theme.textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
                 Text(
                   herbsProvider.error!,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: theme.textTheme.bodyLarge,
                 ),
               ],
             ),
@@ -77,7 +78,8 @@ class HomeScreenState extends State<HomeScreen> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.green[800],
+            // Use theme color for consistency
+            backgroundColor: theme.colorScheme.primary,
             pinned: true,
             floating: true,
             expandedHeight: 200.0,
@@ -97,23 +99,23 @@ class HomeScreenState extends State<HomeScreen> {
               titlePadding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
               title: Text(
                 'HerbalDoc',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Colors.white, fontWeight: FontWeight.bold),
+                style: theme.textTheme.headlineMedium?.copyWith(
+                    color: theme.colorScheme.onPrimary, fontWeight: FontWeight.bold),
               ),
               background: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Colors.green.shade800,
-                      Colors.green.shade600,
-                      Colors.teal.shade400,
+                      theme.colorScheme.primary,
+                      theme.colorScheme.primaryContainer.withAlpha((255 * 0.8).round()),
+                      theme.colorScheme.secondaryContainer.withAlpha((255 * 0.6).round()),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                 ),
                 child: Image.asset(
-                  'assets/images/herbal_logo.png', 
+                  'assets/images/herbal_logo.png',
                   fit: BoxFit.cover,
                   color: Colors.black.withAlpha(26),
                 ),
@@ -125,11 +127,16 @@ class HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
               child: TextField(
                 onChanged: _onSearchChanged,
+                // Ensure text color is readable in both themes
+                style: TextStyle(color: theme.colorScheme.onSurface),
                 decoration: InputDecoration(
                   hintText: 'Search for herbs or symptoms...',
-                  prefixIcon: Icon(Icons.search, color: Colors.green[800]),
+                  // Use theme color for hint text
+                  hintStyle: TextStyle(color: theme.colorScheme.onSurface.withAlpha((255 * 0.6).round())),
+                  prefixIcon: Icon(Icons.search, color: theme.colorScheme.primary),
                   filled: true,
-                  fillColor: Colors.white.withAlpha(230),
+                  // Use a theme-aware fill color
+                  fillColor: theme.colorScheme.surfaceContainerHighest,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide.none,
@@ -148,8 +155,8 @@ class HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
               child: Text(
                 _searchQuery.isEmpty ? 'All Herbs' : 'Search Results',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold, color: Colors.green[900]),
+                style: theme.textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold, color: theme.colorScheme.primary),
               ),
             ),
           ),
@@ -158,7 +165,7 @@ class HomeScreenState extends State<HomeScreen> {
                   child: Center(
                     child: Text(
                       'No herbs found.',
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: theme.textTheme.bodyLarge,
                     ),
                   ),
                 )

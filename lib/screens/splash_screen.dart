@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       final dataLoader = Future.wait([
         _loadHerbs(),
         _loadFavorites(),
-        Future.delayed(const Duration(milliseconds: 2500)),
+        Future.delayed(const Duration(milliseconds: 4500)),
       ]);
 
       await dataLoader;
@@ -175,6 +175,22 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   ),
                 ),
               ],
+            ),
+          ),
+           Positioned(
+            bottom: 30,
+            left: 20,
+            right: 20,
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: Text(
+                'Disclaimer: This app is for informational purposes only. Always consult a healthcare professional before trying any herbal remedies.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.white70,
+                      fontStyle: FontStyle.italic,
+                    ),
+              ),
             ),
           ),
         ],
